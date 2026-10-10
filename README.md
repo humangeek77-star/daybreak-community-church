@@ -24,18 +24,21 @@ Modern, accessible, high-performance website for **Daybreak Community Church** (
 ## 📁 Repository Structure
 ```
 daybreak-church-website/
-├── index.html              # Main landing page (Hero, Pillars, Ministries, Events, Sermons, Contact)
-├── give.html               # Dedicated Giving & Stewardship page with interactive fund selector
+├── index.html              # Main landing page & church showcase
+├── about.html              # Dedicated About Us & 4 Pillars page
+├── ministries.html         # Dedicated Ministries & Outreach page
 ├── events-calendar.html    # Church events & community calendar
-├── meet-the-team.html      # Pastoral & ministry leadership team directory
+├── meet-the-team.html      # Pastoral & ministry leadership directory
 ├── members.html            # Membership, small groups & connection portal
 ├── onlineservices.html     # Live broadcasts, sermons & message archives
+├── contact.html            # Dedicated Contact, directions & prayer requests page
+├── give.html               # Dedicated Giving & Stewardship page
 ├── css/
-│   ├── style.css           # Core design system, layout, components & responsive styling
+│   ├── style.css           # Core design system, layout & page transition styling
 │   └── giving.css          # Giving modal, fund cards & interactive donation styles
 ├── js/
-│   ├── main.js             # Navigation, smooth scroll, modals & interactive components
-│   └── giving.js           # Multi-fund donation modal logic, preset selectors & frequencies
+│   ├── main.js             # Unified smooth page transition & interactive engine
+│   └── giving.js           # Multi-fund donation modal logic & frequency selectors
 ├── assets/
 │   └── images/             # Optimized photography, logos, and fund icons
 ├── serve.js                # Lightweight Node.js local preview server

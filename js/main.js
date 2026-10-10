@@ -26,6 +26,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 6. EVENT MODAL / DETAILS
   initEventInteractions();
+
+  // 7. SMOOTH PAGE TRANSITIONS (Silky fade transition across all page selections)
+  initPageTransitions();
 });
 
 /* ==========================================================================
@@ -414,4 +417,64 @@ function initEventInteractions() {
     modal.style.display = 'none';
     document.body.style.overflow = 'auto';
   }
+}
+
+/* ==========================================================================
+   7. SMOOTH PAGE TRANSITIONS
+   Flawless, seamless fade transition across all internal page navigations
+   ========================================================================== */
+function initPageTransitions() {
+  document.body.classList.remove('page-fading-out');
+
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a');
+    if (!link) return;
+
+    const href = link.getAttribute('href');
+    if (!href) return;
+
+    // Skip anchors, modals, telephone, email, and target="_blank"
+    if (
+      href.startsWith('#') ||
+      href.startsWith('mailto:') ||
+      href.startsWith('tel:') ||
+      href.startsWith('javascript:') ||
+      link.target === '_blank' ||
+      link.hasAttribute('download') ||
+      link.classList.contains('open-giving-modal') ||
+      (link.closest('.give-dropdown-menu') && href.includes('open-giving-modal'))
+    ) {
+      return;
+    }
+
+    let targetUrl;
+    try {
+      targetUrl = new URL(link.href, window.location.href);
+    } catch (err) {
+      return;
+    }
+
+    // Only transition internal pages on the same domain
+    if (targetUrl.origin === window.location.origin) {
+      // If clicking the current page URL without hash, scroll to top
+      if (targetUrl.pathname === window.location.pathname && !targetUrl.hash) {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
+
+      // Smoothly fade out current page then load target
+      e.preventDefault();
+      document.body.classList.add('page-fading-out');
+      setTimeout(() => {
+        window.location.href = targetUrl.href;
+      }, 190);
+    }
+  });
+
+  window.addEventListener('pageshow', (event) => {
+    if (event.persisted) {
+      document.body.classList.remove('page-fading-out');
+    }
+  });
 }

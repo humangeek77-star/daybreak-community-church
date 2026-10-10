@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us | Daybreak Community Church | Lapel, Indiana</title>
+  <meta name="description" content="Discover the story, mission, and pillars of Daybreak Community Church in Lapel, IN. Know God, Grow and find freedom, Discover purpose, and Go make a difference."/>
+  
+  <link rel="icon" type="image/png" href="assets/images/daybreak_logo.png"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="css/giving.css"/>
+  <style>
+    .brand-logo-img {
+      width: 44px;
+      height: 44px;
+      object-fit: contain;
+    }
+    .about-story-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: center;
+      margin-bottom: 72px;
+    }
+    @media (max-width: 991px) {
+      .about-story-grid {
+        grid-template-columns: 1fr;
+        gap: 36px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header class="hero-navbar scrolled">
+    <div class="hero-navbar-container">
+      <a href="index.html" class="brand">
+        <img src="assets/images/daybreak_logo.png" alt="Daybreak Church Logo" class="brand-logo-img"/>
+        <div>
+          DAYBREAK
+          <span class="brand-text-sub">COMMUNITY CHURCH</span>
+        </div>
+      </a>
+
+      <nav class="nav-menu" role="navigation">
+        <a href="about.html" class="hero-nav-link active">About Us</a>
+        <a href="ministries.html" class="hero-nav-link">Ministries</a>
+        <a href="events-calendar.html" class="hero-nav-link">Events Calendar</a>
+        <a href="onlineservices.html" class="hero-nav-link">Watch Online</a>
+        <a href="meet-the-team.html" class="hero-nav-link">Meet the Team</a>
+        <a href="members.html" class="hero-nav-link">Members</a>
+        <a href="contact.html" class="hero-nav-link">Contact</a>
+        
+        <!-- Giving Button & Dropdown -->
+        <div class="give-dropdown-wrapper">
+          <button type="button" class="btn-give-nav open-giving-modal" data-fund="tithes" aria-label="Open Giving and Donations">
+            <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+            <span>Give &amp; Support</span>
+            <svg width="10" height="10" fill="currentColor" viewBox="0 0 24 24" style="opacity: 0.8; margin-left: -2px;"><path d="M7 10l5 5 5-5z"/></svg>
+          </button>
+          <div class="give-dropdown-menu">
+            <div class="give-dropdown-header">Choose a Giving Option</div>
+            <a href="give.html" class="give-dropdown-item open-giving-modal" data-fund="tithes">
+              <span class="icon"><img src="assets/images/fund_tithes.jpg" alt="Tithes" class="nav-give-thumb" /></span>
+              <div>
+                <strong>Tithes &amp; General Ministry</strong>
+                <span class="desc">Sunday worship, pastoral care &amp; operations</span>
+              </div>
+            </a>
+            <a href="give.html" class="give-dropdown-item open-giving-modal" data-fund="pantry">
+              <span class="icon"><img src="assets/images/fund_food_pantry.jpg" alt="Food Pantry" class="nav-give-thumb" /></span>
+              <div>
+                <strong>Lapel Food Pantry &amp; Hot Meals</strong>
+                <span class="desc">Emergency food relief &amp; student dinners</span>
+              </div>
+            </a>
+            <a href="give.html" class="give-dropdown-item open-giving-modal" data-fund="youth">
+              <span class="icon"><img src="assets/images/fund_youth.jpg" alt="Youth &amp; Kids" class="nav-give-thumb" /></span>
+              <div>
+                <strong>Revolution Youth &amp; Kids</strong>
+                <span class="desc">Children's ministry, camp &amp; sports leagues</span>
+              </div>
+            </a>
+            <a href="give.html" class="give-dropdown-item open-giving-modal" data-fund="missions">
+              <span class="icon"><img src="assets/images/fund_missions.jpg" alt="Missions" class="nav-give-thumb" /></span>
+              <div>
+                <strong>Missions &amp; Outreach</strong>
+                <span class="desc">Global compassions &amp; village traditions</span>
+              </div>
+            </a>
+            <a href="give.html" class="give-dropdown-item open-giving-modal" data-fund="recovery">
+              <span class="icon"><img src="assets/images/fund_recovery.jpg" alt="Recovery" class="nav-give-thumb" /></span>
+              <div>
+                <strong>Recovery &amp; Sober Living</strong>
+                <span class="desc">Christ-centered support &amp; recovery groups</span>
+              </div>
+            </a>
+            <a href="give.html" class="give-dropdown-item open-giving-modal" data-fund="benevolence">
+              <span class="icon"><img src="assets/images/fund_benevolence.jpg" alt="Benevolence" class="nav-give-thumb" /></span>
+              <div>
+                <strong>Community Benevolence &amp; Care</strong>
+                <span class="desc">Local assistance &amp; crisis family relief</span>
+              </div>
+            </a>
+            <div class="give-dropdown-footer">
+              <a href="give.html">View Full Giving &amp; Stewardship Page &rarr;</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <div class="navbar-brand-spacer" aria-hidden="true"></div>
+
+      <button class="menu-toggle-btn" aria-label="Toggle navigation menu">
+        &#9776;
+      </button>
+    </div>
+  </header>
+
+  <!-- Page Hero Header -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="heading-small center text-orange">Our Heritage &amp; Mission</div>
+      <h1>ABOUT DAYBREAK COMMUNITY CHURCH</h1>
+      <p>
+        A Christ-centered family loving God, loving people, and making a lasting difference in Lapel, Indiana since 1998.
+      </p>
+    </div>
+  </section>
+
+  <!-- Story & Roots Section -->
+  <section class="section" style="background-color: var(--color-white);">
+    <div class="container">
+      <div class="about-story-grid">
+        <div>
+          <span class="heading-small _12-margin-bottom" style="color: var(--color-primary);">Our Roots &amp; Journey</span>
+          <h2 style="font-size: clamp(28px, 4vw, 42px); line-height: 1.25; margin-bottom: 20px;">
+            Our roots are growing deep and wide.
+          </h2>
+          <p style="font-size: 17px; line-height: 1.85; color: var(--color-muted); margin-bottom: 20px;">
+            Daybreak Community Church knows that our strength lies not only in the words we stand by, but most importantly through the actions of our initiatives. Back in 1998 we realized that by working together we could overcome our challenges much more efficiently, and that is why we ultimately decided to launch Daybreak Community Church.
+          </p>
+          <p style="font-size: 17px; line-height: 1.85; color: var(--color-muted); margin-bottom: 28px;">
+            We are currently partnering with Lapelfoodpantry.com to reach neighbors in need across Madison County. Along with the food pantry, we serve free hot meals to students on Wednesday nights during the school year — recognizing that for some children, this is their only reliable hot meal. Join us as we reach our families!
+          </p>
+          <blockquote style="font-family: var(--font-heading); font-size: 21px; font-weight: 600; font-style: italic; color: var(--color-primary); line-height: 1.45; border-left: 3px solid var(--color-primary); padding-left: 18px; margin-bottom: 28px;">
+            “At Daybreak Community Church we are making a difference in the hearts and minds of those that we meet. We love God! We love people! We love YOU!”
+          </blockquote>
+          <div>
+            <a href="contact.html" class="btn-pill btn-primary">Connect With Us &rarr;</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="church-photo-wrapper" style="margin-bottom: 0;">
+            <div class="church-photo-mask" style="border-radius: 8px; overflow: hidden; box-shadow: 0 16px 36px rgba(0,0,0,0.12);">
+              <img src="assets/images/daybreak_about_roots.jpg" alt="Daybreak Church Roots" class="church-photo" style="width: 100%; height: auto; display: block;"/>
+            </div>
+            <div class="photo-description" style="text-align: center; margin-top: 14px; color: var(--color-muted); font-size: 14px;">
+              Daybreak Community Church &bull; Serving Lapel, Anderson, Pendleton &amp; Noblesville since 1998.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 Pillars of Daybreak -->
+      <div style="text-align: center; max-width: 720px; margin: 0 auto 48px;">
+        <span class="heading-small text-orange">Our Foundation</span>
+        <h2 style="font-size: clamp(26px, 3.5vw, 38px); margin-bottom: 12px;">The Four Pillars of Daybreak</h2>
+        <p style="color: var(--color-muted); font-size: 17px;">
+          Everything we do centers around four life-changing steps designed to help every person flourish in Christ.
+        </p>
+      </div>
+
+      <div class="mission-pillars-grid">
+        <div class="pillar-card">
+          <div class="pillar-step">Pillar 01</div>
+          <h3 class="pillar-title">Know God</h3>
+          <p class="pillar-desc">
+            Help people know God personally through vibrant Sunday worship, Scripture teaching, and an authentic relationship with Jesus Christ.
+          </p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-step">Pillar 02</div>
+          <h3 class="pillar-title">Grow &amp; Find Freedom</h3>
+          <p class="pillar-desc">
+            Grow alongside genuine friends through small groups, youth classes, and recovery communities that bring lasting life transformation.
+          </p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-step">Pillar 03</div>
+          <h3 class="pillar-title">Discover Your Purpose</h3>
+          <p class="pillar-desc">
+            Discover the unique spiritual gifts, passions, and design God placed within you so you can live with meaning and fulfillment.
+          </p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-step">Pillar 04</div>
+          <h3 class="pillar-title">Go Make a Difference</h3>
+          <p class="pillar-desc">
+            Go and put faith into action through student hot meals, food pantry distributions, sports ministries, and global outreach.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Community Photo & Quote Banner -->
+  <section class="section" style="background-color: var(--color-bg-cream);">
+    <div class="container">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;">
+        <div style="border-radius: 8px; overflow: hidden; box-shadow: 0 14px 32px rgba(0,0,0,0.08);">
+          <img src="assets/images/daybreak_community.jpg" alt="Daybreak Community Gathering" style="width: 100%; height: auto; display: block;"/>
+        </div>
+        <div>
+          <span class="heading-small text-orange">Welcoming Everyone</span>
+          <h2 style="margin-bottom: 18px; font-size: clamp(24px, 3.5vw, 36px);">A Place Where You Belong</h2>
+          <p style="color: var(--color-muted); font-size: 17px; line-height: 1.85; margin-bottom: 24px;">
+            Whether you have grown up in church your whole life or have never set foot inside a church before, Daybreak Community Church welcomes you with open arms, genuine warmth, and unconditional grace. Come as you are!
+          </p>
+          <div style="display: flex; gap: 14px; flex-wrap: wrap;">
+            <a href="meet-the-team.html" class="btn-pill btn-primary">Meet Our Pastors</a>
+            <a href="ministries.html" class="btn-pill btn-outline-dark">Explore Ministries</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <section class="cta-section">
+    <div class="container">
+      <h2 class="cta-title">Come Visit Us and Let’s Praise The Lord Together</h2>
+      <div class="cta-subtitle">1219 Main St, Lapel, Indiana 46051 &bull; (765) 534-4555</div>
+      <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-bottom: 24px;">
+        <a href="https://maps.google.com/?q=1219+Main+St,+Lapel,+IN+46051" target="_blank" rel="noopener noreferrer" class="btn-pill btn-primary">
+          Get Directions
+        </a>
+        <button type="button" class="btn-give-cta open-giving-modal" data-fund="tithes">
+          <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          <span>Support Our Ministries &amp; Outreach</span>
+        </button>
+      </div>
+
+      <!-- Quick Fund Selection Strip -->
+      <div class="giving-funds-strip">
+        <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; opacity: 0.7; font-weight: 700;">Direct Giving Options:</span>
+        <button type="button" class="giving-fund-tag open-giving-modal" data-fund="tithes"><img src="assets/images/fund_tithes.jpg" alt="" class="giving-tag-thumb" /> Tithes &amp; General</button>
+        <button type="button" class="giving-fund-tag open-giving-modal" data-fund="pantry"><img src="assets/images/fund_food_pantry.jpg" alt="" class="giving-tag-thumb" /> Lapel Food Pantry &amp; Meals</button>
+        <button type="button" class="giving-fund-tag open-giving-modal" data-fund="youth"><img src="assets/images/fund_youth.jpg" alt="" class="giving-tag-thumb" /> Youth &amp; Kids</button>
+        <button type="button" class="giving-fund-tag open-giving-modal" data-fund="missions"><img src="assets/images/fund_missions.jpg" alt="" class="giving-tag-thumb" /> Global Missions</button>
+        <button type="button" class="giving-fund-tag open-giving-modal" data-fund="recovery"><img src="assets/images/fund_recovery.jpg" alt="" class="giving-tag-thumb" /> Recovery &amp; Sober Living</button>
+        <button type="button" class="giving-fund-tag open-giving-modal" data-fund="benevolence"><img src="assets/images/fund_benevolence.jpg" alt="" class="giving-tag-thumb" /> Benevolence &amp; Care</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer-section">
+    <div class="container footer-container">
+      <div class="footer-info-col">
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+          <img src="assets/images/daybreak_logo.png" alt="Daybreak Church Logo" style="width: 38px; height: 38px; object-fit: contain;"/>
+          <h3 style="margin-bottom: 0;">DAYBREAK COMMUNITY CHURCH</h3>
+        </div>
+        <p>
+          Know Grow Discover Go. Loving God and loving people in Lapel, Indiana since 1998.
+        </p>
+        <p style="font-size: 14px; font-weight: 700; color: var(--color-primary);">
+          We love God! We love people! We love YOU!
+        </p>
+      </div>
+
+      <div class="footer-links-col">
+        <h4>Gatherings</h4>
+        <ul class="footer-links-list">
+          <li><strong>Sunday Worship:</strong> 10:45 AM</li>
+          <li><strong>Wednesday Classes:</strong> 6:00 PM</li>
+          <li><strong>1219 Main St</strong>, Lapel, IN 46051</li>
+          <li><strong>Phone:</strong> (765) 534-4555</li>
+        </ul>
+      </div>
+
+      <div class="footer-links-col">
+        <h4>Giving &amp; Pages</h4>
+        <ul class="footer-links-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="ministries.html">Ministries</a></li>
+          <li><a href="give.html">Ways to Give &amp; Tithe</a></li>
+          <li><a href="meet-the-team.html">Meet the Team</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <div>&copy; 2026 Daybreak Community Church. 1219 Main St, Lapel, IN 46051. (765) 534-4555.</div>
+      <div>Know Grow Discover Go</div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/giving.js"></script>
+</body>
+</html>
