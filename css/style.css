@@ -49,7 +49,7 @@ div[id] {
 body {
   font-family: var(--font-body);
   color: var(--color-dark);
-  background-color: var(--color-white);
+  background-color: var(--color-dark); /* Dark base eliminates white strobe flash behind heroes */
   font-size: 16.5px;
   line-height: 1.8;
   overflow-x: hidden;
@@ -68,7 +68,7 @@ body {
   box-shadow: 0 0 14px rgba(244, 93, 72, 0.65);
   z-index: 999999;
   pointer-events: none;
-  transition: width 0.24s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+  transition: width 0.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
   opacity: 0;
 }
 
@@ -78,16 +78,13 @@ body {
 
 .page-main-content {
   opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1), transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
+  transition: opacity 0.16s ease-out;
+  will-change: opacity;
   min-height: calc(100vh - 250px);
 }
 
 .page-main-content.is-transitioning {
-  opacity: 0;
-  transform: translateY(6px);
-  transition: opacity 0.16s ease-in, transform 0.16s ease-in;
+  opacity: 0.72; /* Soft contrast dissolve — never drops to 0, zero blackout/whiteout flash! */
 }
 
 .page-hero {
@@ -189,6 +186,7 @@ img {
   padding-top: 110px;
   padding-bottom: 110px;
   position: relative;
+  background-color: var(--color-white);
 }
 
 /* Section Kicker / Subtitle Badge */
@@ -333,21 +331,24 @@ img {
    NAVIGATION
    ========================================================================== */
 .hero-navbar {
-  position: absolute;
-  top: 28px;
+  position: fixed;
+  top: 0;
   left: 0;
   right: 0;
-  z-index: 100;
-  transition: all 0.3s ease;
+  z-index: 1000;
+  background: rgba(22, 28, 34, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  padding: 12px 0;
+  transition: background-color 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
 .hero-navbar.scrolled {
-  position: fixed;
-  top: 0;
-  background: rgba(27, 33, 40, 0.95);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.2);
+  background: rgba(18, 22, 28, 0.98);
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.35);
+  border-bottom-color: rgba(255, 255, 255, 0.12);
   padding: 12px 0;
 }
 

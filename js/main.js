@@ -29,6 +29,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 7. SMOOTH PAGE TRANSITIONS (Silky fade transition across all page selections)
   initPageTransitions();
+
+  // 8. BACKGROUND PREFETCHING (Pre-loads pages for instant 0ms zero-flash swaps)
+  prefetchSitePages();
 });
 
 /* ==========================================================================
@@ -491,6 +494,47 @@ function reinitializePageComponents() {
   initEventInteractions();
 }
 
+/* Cache of fetched page HTML strings to eliminate network roundtrips */
+const pageCache = new Map();
+
+async function fetchPage(url) {
+  const normalizedUrl = new URL(url, window.location.origin).pathname;
+  if (pageCache.has(normalizedUrl)) {
+    return pageCache.get(normalizedUrl);
+  }
+  const response = await fetch(url);
+  if (!response.ok) throw new Error('Fetch failed');
+  const html = await response.text();
+  pageCache.set(normalizedUrl, html);
+  return html;
+}
+
+function prefetchSitePages() {
+  const pages = [
+    'index.html',
+    'about.html',
+    'ministries.html',
+    'events-calendar.html',
+    'onlineservices.html',
+    'meet-the-team.html',
+    'members.html',
+    'contact.html',
+    'give.html'
+  ];
+
+  const doPrefetch = () => {
+    pages.forEach(p => {
+      fetchPage(p).catch(() => {});
+    });
+  };
+
+  if ('requestIdleCallback' in window) {
+    window.requestIdleCallback(doPrefetch);
+  } else {
+    setTimeout(doPrefetch, 800);
+  }
+}
+
 let isPageTransitionActive = false;
 
 async function transitionToPage(targetUrl, pushState = true) {
@@ -516,14 +560,9 @@ async function transitionToPage(targetUrl, pushState = true) {
     }
   }
 
-  // Smoothly fade out current main content (160ms)
-  main.classList.add('is-transitioning');
-
   try {
-    const response = await fetch(targetUrl);
-    if (!response.ok) throw new Error('Fetch failed');
-    const htmlText = await response.text();
-
+    // 1. Fetch target HTML (instant if pre-cached!)
+    const htmlText = await fetchPage(targetUrl);
     const parser = new DOMParser();
     const doc = parser.parseFromString(htmlText, 'text/html');
 
@@ -533,29 +572,16 @@ async function transitionToPage(targetUrl, pushState = true) {
       return;
     }
 
-    // Wait for the gentle fade out (160ms)
-    await new Promise(resolve => setTimeout(resolve, 160));
+    // 2. Soft micro-dissolve (dips to 0.72, never drops to 0 — zero flash!)
+    main.classList.add('is-transitioning');
+    await new Promise(resolve => setTimeout(resolve, 60));
 
-    // Update document title
+    // 3. Update document title
     if (doc.title) {
       document.title = doc.title;
     }
 
-    // Replace main content
-    main.innerHTML = newMain.innerHTML;
-
-    // Update navbar scrolled state if target page defines it
-    const newNavbar = doc.querySelector('.hero-navbar');
-    const currentNavbar = document.querySelector('.hero-navbar');
-    if (newNavbar && currentNavbar) {
-      if (newNavbar.classList.contains('scrolled')) {
-        currentNavbar.classList.add('scrolled');
-      } else if (window.scrollY < 40) {
-        currentNavbar.classList.remove('scrolled');
-      }
-    }
-
-    // Update active nav link pill highlight
+    // 4. Update active nav link pill highlight immediately
     const targetUrlObj = new URL(targetUrl, window.location.origin);
     const targetFilename = targetUrlObj.pathname.split('/').pop() || 'index.html';
 
@@ -568,7 +594,10 @@ async function transitionToPage(targetUrl, pushState = true) {
       }
     });
 
-    // Reset scroll smoothly to top or anchor target
+    // 5. Replace main content
+    main.innerHTML = newMain.innerHTML;
+
+    // 6. Reset scroll smoothly to top or anchor target
     if (targetUrlObj.hash) {
       const anchorEl = document.querySelector(targetUrlObj.hash);
       if (anchorEl) {
@@ -580,22 +609,21 @@ async function transitionToPage(targetUrl, pushState = true) {
       window.scrollTo(0, 0);
     }
 
-    // Force style recalculation so incoming animation is buttery smooth
+    // 7. Force synchronous reflow so opacity recovery is silky smooth
     void main.offsetHeight;
 
-    // Animate new content in
     requestAnimationFrame(() => {
       main.classList.remove('is-transitioning');
       finishProgressBar();
       isPageTransitionActive = false;
     });
 
-    // Update browser history
+    // 8. Update browser history
     if (pushState) {
       history.pushState({ url: targetUrl }, '', targetUrl);
     }
 
-    // Re-bind page-specific interactive logic
+    // 9. Re-bind interactive components
     reinitializePageComponents();
   } catch (err) {
     console.warn('Falling back to direct navigation:', err);
