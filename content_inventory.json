@@ -1,0 +1,305 @@
+[
+  {
+    "pageName": "Home",
+    "originalUrl": "https://www.lapeldaybreak.com/",
+    "destinationRoute": "index.html#home",
+    "purpose": "Main church gateway, welcoming visitors, communicating mission, service times, and church initiatives.",
+    "meta": {
+      "title": "Daybreak Community Church | Lapel Indiana | Church Websites",
+      "description": "Daybreak Community Church in Lapel Indiana serving the surroundings area of Anderson, Pendleton, Noblesville, and many others. Please visit on Sunday 10:45 AM or Wednesday 6PM Find us under Religious Organization ,Youth Outreach Program, Church Near Me"
+    },
+    "sections": [
+      {
+        "sectionName": "Header / Navigation",
+        "content": {
+          "brand": "Daybreak Community Church",
+          "motto": "Know Grow Discover Go",
+          "phone": "(765) 534-4555",
+          "address": "1219 Main St, Lapel, IN 46051, USA",
+          "links": [
+            {
+              "text": "Home",
+              "href": "/"
+            },
+            {
+              "text": "Watch Online",
+              "href": "/onlineservices"
+            },
+            {
+              "text": "Donations",
+              "href": "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=onlinedonations@lapeldaybreak.com&item_name=Daybreak%20Community%20Church&currency_code=USD"
+            },
+            {
+              "text": "Members",
+              "href": "/members"
+            },
+            {
+              "text": "Meet the Team",
+              "href": "/meet-the-team"
+            },
+            {
+              "text": "Events Calendar",
+              "href": "/events-calendar"
+            }
+          ]
+        }
+      },
+      {
+        "sectionName": "Hero Banner",
+        "content": {
+          "headline": "Working Towards a Brighter Future",
+          "ctaButton": "I'm interested in learning more about connecting with Daybreak",
+          "phoneCta": "(765) 534-4555"
+        },
+        "assets": [
+          {
+            "name": "Hero Banner Photo",
+            "local": "assets/images/daybreak_hero_banner.jpg",
+            "original": "https://static.wixstatic.com/media/560e58_a572ad28ce9a4260a989e2e96c8d7911~mv2.jpg"
+          },
+          {
+            "name": "Daybreak Monogram Logo",
+            "local": "assets/images/daybreak_logo.png",
+            "original": "https://static.wixstatic.com/media/560e58_06415f35b12d4460ad59711541c4e6f8~mv2.png"
+          }
+        ]
+      },
+      {
+        "sectionName": "About Us",
+        "content": {
+          "title": "ABOUT US",
+          "subtitle": "Our Roots are Growing Deep and Wide",
+          "bodyText": "Daybreak Community Church knows that our strength lies not only in the words we stand by but most importantly through the actions of our initiatives. Back in 1998 we realized that by working together we could overcome our challenges much more efficiently, and that is why we ultimately decided to launch Daybreak Community Church. Please join in our quest to make a difference in the lives of our and surrounding communities. We are currently working with Lapelfoodpantry.com to reach out along with many others who have joined in as well. Along with that food pantry program we are currently serving hot meals to kids on Wednesday nights during the school year. We realize that this may be the only hot meal for some of our students. Join us as we reach our families in the community! At Daybreak Community Church we are making a difference in the hearts and minds of those that we meet. We love God! We love people! We love YOU!",
+          "missionPillars": "Our mission to help people Know God, Grow and find freedom, Discover their purpose and gifts and then help them to Go and make a difference for God!"
+        },
+        "assets": [
+          {
+            "name": "Church Roots Photo",
+            "local": "assets/images/daybreak_about_roots.jpg",
+            "original": "https://static.wixstatic.com/media/634ae93ad10c49dc8cd89caad6b7406c.jpg"
+          },
+          {
+            "name": "Church Community Gathering",
+            "local": "assets/images/daybreak_community.jpg",
+            "original": "https://static.wixstatic.com/media/54db4c322f9644b38ac9956285717c12.jpg"
+          }
+        ]
+      },
+      {
+        "sectionName": "Activities & Sports Ministry",
+        "content": {
+          "title": "ACTIVITIES",
+          "subtitle": "Making A Difference",
+          "classesSchedule": "We teach classes on Wednesday nights for kids, teens, ladies, and men starting at 6 p.m.",
+          "sportsMinistry": "Our sports ministry is active with over 30 young adults involved in them. Some of our activities include: Coed and Men's Softball, Coed Volleyball, 3 on 3 basketball, noodle making for the village fair, personal growth classes, game nights, bible study, prayer groups, worship nights, kids and teen camp, marriage retreat, Fall Festival/trunk n Treat, and many others."
+        },
+        "assets": [
+          {
+            "name": "Sports & Activities",
+            "local": "assets/images/ministry_sports_activities.jpg",
+            "original": "https://static.wixstatic.com/media/9156348f9b554babaa4d6c009ce2db0f.jpg"
+          }
+        ]
+      },
+      {
+        "sectionName": "Food Donations Drop-Off Center",
+        "content": {
+          "title": "FOOD DONATIONS DROP-OFF CENTER",
+          "subtitle": "Helping The Community",
+          "description": "At Daybreak Community Church, we are dedicated to stepping up our efforts in addressing this issue. Food Donation Drop-Off is by no means an easy feat, but through cooperation and community empowerment we believe we can facilitate progress in this area. We are always striving to make a difference, and invite you to learn more and lend your support. Currently, we are also picking up donations for our friends at lapelfoodpantry.com be sure to visit their page to make any monetary donations directly to them. Follow us to learn more and stay up to date on current events."
+        },
+        "assets": [
+          {
+            "name": "Food Donations",
+            "local": "assets/images/ministry_food_pantry.jpg",
+            "original": "https://static.wixstatic.com/media/1ede0ddbc0b64ae19c06ae2cae61653c.jpg"
+          }
+        ]
+      },
+      {
+        "sectionName": "Overseas Missions",
+        "content": {
+          "title": "OVER SEAS MISSIONS",
+          "subtitle": "Reinforcing our Commitment",
+          "description": "With this initiative, our goal is to promote great opportunities for those in need. With access to the right resources, people can become empowered by their own abilities and gain the confidence to fulfill their potential. Learn more about our work by getting in touch with our team today."
+        },
+        "assets": [
+          {
+            "name": "Overseas Missions",
+            "local": "assets/images/ministry_overseas_missions.jpg",
+            "original": "https://static.wixstatic.com/media/8e91a58fcc76400f859ebb4e091de471.jpg"
+          }
+        ]
+      },
+      {
+        "sectionName": "Recovery Programs",
+        "content": {
+          "title": "Recovery Programs",
+          "subtitle": "One Step at a Time",
+          "description": "With our organization’s mission always in mind, we strive to find new strategies for dealing with this challenge. Sober living is something that we take very seriously, and our team is working each and every day to make a positive impact. Contact us to learn more about our commitment to this cause."
+        },
+        "assets": [
+          {
+            "name": "Recovery Programs",
+            "local": "assets/images/ministry_recovery_programs.jpg",
+            "original": "https://static.wixstatic.com/media/3478cda9e3c049ac9956253d6d5a067a.jpg"
+          }
+        ]
+      },
+      {
+        "sectionName": "Contact & Footer",
+        "content": {
+          "heading": "Learn more about our church and how you can get involved in your community with Lapel Daybreak Church",
+          "address": "1219 Main St, Lapel, IN 46051, USA",
+          "phone": "(765) 534-4555",
+          "serviceTimes": "Sunday 10:45 AM or Wednesday 6PM",
+          "serviceArea": "Lapel Indiana serving the surroundings area of Anderson, Pendleton, Noblesville, and many others."
+        }
+      }
+    ],
+    "status": "Extracted and mapped 100%"
+  },
+  {
+    "pageName": "Meet the Team",
+    "originalUrl": "https://www.lapeldaybreak.com/meet-the-team",
+    "destinationRoute": "meet-the-team.html (and index.html#team)",
+    "purpose": "Pastoral leadership biographies and contact access.",
+    "meta": {
+      "title": "Meet the Team | Daybreak Community Church",
+      "description": "Daybreak Community Church Leadership pastoral team details."
+    },
+    "teamMembers": [
+      {
+        "name": "Andrew Cole",
+        "title": "Lead Pastor",
+        "bio": "Andrew Cole joined Daybreak Community Church with the vision and drive to improve upon our Church, and focused on developing the organization with experience and integrity.",
+        "contactEmail": "acole@lapeldaybreak.com",
+        "photo": {
+          "local": "assets/images/pastor_andrew_cole_family.png",
+          "original": "https://static.wixstatic.com/media/675744_cdb9a61d62c8462f82a5d2cef7b46dd4~mv2.png"
+        }
+      },
+      {
+        "name": "Alex Small",
+        "title": "Youth Pastor",
+        "bio": "Welcome to Alex's Corner! Here, a talented individual with a deep love for Lord is dedicated to uplifting our teens through the power of music and inspiring, fun messages. Join us on a journey filled with, faith, and joy as we explore the beautiful intersection of youth and melody!",
+        "contactEmail": "tjohnson@lapeldaybreak.com",
+        "photo": {
+          "local": "assets/images/pastor_alex_small.jpg",
+          "original": "https://static.wixstatic.com/media/675744_892b7c0e1bec47bcb90748ca3b700054~mv2.jpg"
+        }
+      },
+      {
+        "name": "Naomi Small",
+        "title": "Pastor of Children's Ministries",
+        "bio": "Naomi is a truly gifted children's ministry leader who radiates love for the Lord and a passion for teaching kids. She brings joy and excitement to her lessons, engaging children through creative crafts, lively games, and uplifting music. With each message, Naomi inspires young hearts to learn about Jesus in a fun and memorable way. Her dedication makes every moment in ministry a delightful adventure for both kids and their families.",
+        "contactEmail": "gbloom@lapeldaybreak.com",
+        "photo": {
+          "local": "assets/images/pastor_naomi_small.jpg",
+          "original": "https://static.wixstatic.com/media/675744_52fb95ddefe54ed19ef9daa5756b6593~mv2.jpg"
+        }
+      }
+    ],
+    "status": "Extracted and mapped 100%"
+  },
+  {
+    "pageName": "Watch Online",
+    "originalUrl": "https://www.lapeldaybreak.com/onlineservices",
+    "destinationRoute": "onlineservices.html (and index.html#stream)",
+    "purpose": "Live stream access, video sermons, and message announcements.",
+    "meta": {
+      "title": "Watch Online | Daybreak Community Church | United States",
+      "description": "Pastor Andy Cole Invites you to visit us. If you are trying to find video sermons please look no further... you have made it. We are uploading content regularly so please check back often to stay informed on the events and our revised schedule of events to come. Watch Lapel Daybreak Online."
+    },
+    "content": {
+      "headline": "Watch Online",
+      "invitation": "Pastor Andy Cole Invites you to visit us. If you are trying to find video sermons please look no further... you have made it. We are uploading content regularly so please check back often to stay informed on the events and our revised schedule of events to come.",
+      "messageNotesTitle": "Message Notes & Announcements",
+      "announcementHeading": "We are open!",
+      "announcementBody": "This is a church website built for a religious organization. We are humbled that you joined us today! Thank you and please bookmark our page or become a member today."
+    },
+    "assets": [
+      {
+        "name": "Online Sermon Banner",
+        "local": "assets/images/online_sermon_banner.jpg",
+        "original": "https://static.wixstatic.com/media/e30997dd329742c89c8b45aa62544085.jpg"
+      },
+      {
+        "name": "Pastor Andy Invite Photo",
+        "local": "assets/images/online_pastor_andy_invite.jpg",
+        "original": "https://static.wixstatic.com/media/675744_fbc08158486343e8adf81ef11a5c21a2f001.jpg"
+      }
+    ],
+    "status": "Extracted and mapped 100%"
+  },
+  {
+    "pageName": "Events Calendar & Car Show",
+    "originalUrl": "https://www.lapeldaybreak.com/events-calendar and https://www.lapeldaybreak.com/event-details/lapel-village-fair-car-show",
+    "destinationRoute": "events-calendar.html (and index.html#events)",
+    "purpose": "Upcoming church and community events, schedules, and details.",
+    "events": [
+      {
+        "name": "Lapel Village Fair / Car Show",
+        "description": "Join us as we reach our community and make a big splash for the Kingdom.",
+        "date": "July 10 - July 11",
+        "time": "Friday 5:00 PM - Saturday 1:00 PM",
+        "location": "1219 Main St, Lapel, IN 46051, USA"
+      },
+      {
+        "name": "Sunday Morning Worship & Communion",
+        "description": "Join us for inspiring worship and life-giving biblical messages by Pastor Andrew Cole. Daybreak Kids program active.",
+        "date": "Every Sunday",
+        "time": "10:45 AM",
+        "location": "1219 Main St, Lapel, IN 46051"
+      },
+      {
+        "name": "Wednesday Family Night & Hot Meals for Kids",
+        "description": "Serving hot home-cooked meals for kids during the school year, followed by classes for kids, teens, women, and men.",
+        "date": "Every Wednesday",
+        "time": "6:00 PM",
+        "location": "1219 Main St, Lapel, IN 46051"
+      },
+      {
+        "name": "Lapel Village Fair Noodle Making Tradition",
+        "description": "Community tradition preparing homemade noodles for the town fair.",
+        "date": "Village Fair Tradition",
+        "time": "Annual Event",
+        "location": "Daybreak Kitchen"
+      },
+      {
+        "name": "Young Adult Sports Ministry Leagues",
+        "description": "Coed Softball, Men's Softball, Coed Volleyball, and 3-on-3 Basketball involving over 30 young adults.",
+        "date": "Seasonal League",
+        "time": "Weekly Matchups",
+        "location": "Lapel Sports Fields"
+      },
+      {
+        "name": "Fall Festival & Community Trunk-or-Treat",
+        "description": "Annual family celebration with safe trick-or-treating, games, and fellowship for Lapel families.",
+        "date": "October",
+        "time": "Annual Fall Celebration",
+        "location": "Daybreak Grounds"
+      }
+    ],
+    "status": "Extracted and mapped 100%"
+  },
+  {
+    "pageName": "Members Portal & Connection",
+    "originalUrl": "https://www.lapeldaybreak.com/members",
+    "destinationRoute": "members.html (and index.html#contact)",
+    "purpose": "Membership inquiry, community connections, and connection card.",
+    "content": {
+      "headline": "Connecting with Daybreak",
+      "callToAction": "I'm interested in learning more about connecting with Daybreak",
+      "missionStatement": "At Daybreak Community Church we are making a difference in the hearts and minds of those that we meet. We love God! We love people! We love YOU!"
+    },
+    "status": "Extracted and mapped 100%"
+  },
+  {
+    "pageName": "Donations / Giving",
+    "originalUrl": "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=onlinedonations@lapeldaybreak.com&item_name=Daybreak%20Community%20Church&currency_code=USD",
+    "destinationRoute": "External Verified PayPal Direct Giving Link",
+    "purpose": "Secure online tithes, gifts, and mission support for Daybreak Community Church.",
+    "status": "Wired directly to verified church PayPal endpoint"
+  }
+]
