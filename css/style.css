@@ -53,12 +53,41 @@ body {
   font-size: 16.5px;
   line-height: 1.8;
   overflow-x: hidden;
-  opacity: 1;
-  transition: opacity 0.22s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
-body.page-fading-out {
+/* ==========================================================================
+   SEAMLESS PAGE TRANSITION & LUXURY PROGRESS BAR
+   ========================================================================== */
+#luxury-page-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--color-primary), #ff8a65, var(--color-primary));
+  box-shadow: 0 0 14px rgba(244, 93, 72, 0.65);
+  z-index: 999999;
+  pointer-events: none;
+  transition: width 0.24s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
   opacity: 0;
+}
+
+#luxury-page-progress.active {
+  opacity: 1;
+}
+
+.page-main-content {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1), transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+  min-height: calc(100vh - 250px);
+}
+
+.page-main-content.is-transitioning {
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.16s ease-in, transform 0.16s ease-in;
 }
 
 .page-hero {

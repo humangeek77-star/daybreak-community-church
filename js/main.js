@@ -382,36 +382,62 @@ function initContactForm() {
    ========================================================================== */
 function initEventInteractions() {
   const eventRows = document.querySelectorAll('.events-collection-item');
-  const modal = document.getElementById('event-modal');
-  const modalClose = document.getElementById('modal-close-btn');
+  if (!eventRows.length) return;
 
-  if (!eventRows.length || !modal) return;
+  let modal = document.getElementById('event-modal');
+  if (!modal) {
+    modal = document.createElement('div');
+    modal.id = 'event-modal';
+    modal.className = 'event-modal-overlay';
+    modal.innerHTML = `
+      <div class="event-modal-content">
+        <button id="modal-close-btn" class="modal-close-btn" aria-label="Close modal">&times;</button>
+        <div id="modal-event-date" class="heading-small" style="font-size: 14px; margin-bottom: 12px;"></div>
+        <h3 id="modal-event-title" style="margin-bottom: 16px;"></h3>
+        <div id="modal-event-location" style="font-weight: 700; color: var(--color-primary); margin-bottom: 16px; font-size: 14px;"></div>
+        <p id="modal-event-desc" style="color: var(--color-muted); line-height: 1.8; margin-bottom: 32px;"></p>
+        <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+          <a href="contact.html" onclick="document.getElementById('event-modal').style.display='none';" class="btn-pill btn-primary" style="padding: 12px 28px; font-size: 12px;">
+            Contact Church / Learn More
+          </a>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(modal);
+  }
+
+  const modalClose = modal.querySelector('#modal-close-btn');
 
   eventRows.forEach(row => {
-    row.addEventListener('click', () => {
+    row.onclick = () => {
       const title = row.getAttribute('data-event-title');
       const date = row.getAttribute('data-event-date');
       const time = row.getAttribute('data-event-time');
       const location = row.getAttribute('data-event-location');
       const desc = row.getAttribute('data-event-desc');
 
-      document.getElementById('modal-event-title').textContent = title || '';
-      document.getElementById('modal-event-date').textContent = `${date || ''} • ${time || ''}`;
-      document.getElementById('modal-event-location').textContent = location || 'Daybreak Community Church - Lapel, IN';
-      document.getElementById('modal-event-desc').textContent = desc || '';
+      const titleEl = document.getElementById('modal-event-title');
+      const dateEl = document.getElementById('modal-event-date');
+      const locEl = document.getElementById('modal-event-location');
+      const descEl = document.getElementById('modal-event-desc');
+
+      if (titleEl) titleEl.textContent = title || '';
+      if (dateEl) dateEl.textContent = `${date || ''} • ${time || ''}`;
+      if (locEl) locEl.textContent = location || 'Daybreak Community Church - Lapel, IN';
+      if (descEl) descEl.textContent = desc || '';
 
       modal.style.display = 'flex';
       document.body.style.overflow = 'hidden';
-    });
+    };
   });
 
   if (modalClose) {
-    modalClose.addEventListener('click', closeModal);
+    modalClose.onclick = closeModal;
   }
 
-  modal.addEventListener('click', (e) => {
+  modal.onclick = (e) => {
     if (e.target === modal) closeModal();
-  });
+  };
 
   function closeModal() {
     modal.style.display = 'none';
@@ -420,11 +446,167 @@ function initEventInteractions() {
 }
 
 /* ==========================================================================
-   7. SMOOTH PAGE TRANSITIONS
-   Flawless, seamless fade transition across all internal page navigations
+   7. LUXURY SEAMLESS PAGE TRANSITIONS (Zero Header Flash, SPA Cross-Fade)
    ========================================================================== */
+let progressBarEl = null;
+
+function getProgressBar() {
+  if (!progressBarEl) {
+    progressBarEl = document.getElementById('luxury-page-progress');
+    if (!progressBarEl) {
+      progressBarEl = document.createElement('div');
+      progressBarEl.id = 'luxury-page-progress';
+      document.body.appendChild(progressBarEl);
+    }
+  }
+  return progressBarEl;
+}
+
+function startProgressBar() {
+  const bar = getProgressBar();
+  bar.classList.add('active');
+  bar.style.width = '0%';
+  bar.style.opacity = '1';
+  requestAnimationFrame(() => {
+    bar.style.width = '70%';
+  });
+}
+
+function finishProgressBar() {
+  const bar = getProgressBar();
+  bar.style.width = '100%';
+  setTimeout(() => {
+    bar.style.opacity = '0';
+    setTimeout(() => {
+      bar.classList.remove('active');
+      bar.style.width = '0%';
+    }, 300);
+  }, 150);
+}
+
+function reinitializePageComponents() {
+  initScriptureShowcase();
+  initScrollAnimations();
+  initContactForm();
+  initEventInteractions();
+}
+
+let isPageTransitionActive = false;
+
+async function transitionToPage(targetUrl, pushState = true) {
+  if (isPageTransitionActive) return;
+
+  const main = document.getElementById('main-content');
+  if (!main) {
+    window.location.href = targetUrl;
+    return;
+  }
+
+  isPageTransitionActive = true;
+  startProgressBar();
+
+  // Close mobile navigation drawer cleanly if open
+  const navMenu = document.querySelector('.nav-menu');
+  const toggleBtn = document.querySelector('.menu-toggle-btn');
+  if (navMenu && navMenu.classList.contains('active')) {
+    navMenu.classList.remove('active');
+    if (toggleBtn) {
+      toggleBtn.setAttribute('aria-expanded', 'false');
+      toggleBtn.innerHTML = '&#9776;';
+    }
+  }
+
+  // Smoothly fade out current main content (160ms)
+  main.classList.add('is-transitioning');
+
+  try {
+    const response = await fetch(targetUrl);
+    if (!response.ok) throw new Error('Fetch failed');
+    const htmlText = await response.text();
+
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(htmlText, 'text/html');
+
+    const newMain = doc.getElementById('main-content');
+    if (!newMain) {
+      window.location.href = targetUrl;
+      return;
+    }
+
+    // Wait for the gentle fade out (160ms)
+    await new Promise(resolve => setTimeout(resolve, 160));
+
+    // Update document title
+    if (doc.title) {
+      document.title = doc.title;
+    }
+
+    // Replace main content
+    main.innerHTML = newMain.innerHTML;
+
+    // Update navbar scrolled state if target page defines it
+    const newNavbar = doc.querySelector('.hero-navbar');
+    const currentNavbar = document.querySelector('.hero-navbar');
+    if (newNavbar && currentNavbar) {
+      if (newNavbar.classList.contains('scrolled')) {
+        currentNavbar.classList.add('scrolled');
+      } else if (window.scrollY < 40) {
+        currentNavbar.classList.remove('scrolled');
+      }
+    }
+
+    // Update active nav link pill highlight
+    const targetUrlObj = new URL(targetUrl, window.location.origin);
+    const targetFilename = targetUrlObj.pathname.split('/').pop() || 'index.html';
+
+    document.querySelectorAll('.hero-nav-link').forEach(link => {
+      const linkFilename = new URL(link.href, window.location.origin).pathname.split('/').pop() || 'index.html';
+      if (linkFilename === targetFilename) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+
+    // Reset scroll smoothly to top or anchor target
+    if (targetUrlObj.hash) {
+      const anchorEl = document.querySelector(targetUrlObj.hash);
+      if (anchorEl) {
+        smoothGlideToElement(anchorEl, targetUrlObj.hash);
+      } else {
+        window.scrollTo(0, 0);
+      }
+    } else {
+      window.scrollTo(0, 0);
+    }
+
+    // Force style recalculation so incoming animation is buttery smooth
+    void main.offsetHeight;
+
+    // Animate new content in
+    requestAnimationFrame(() => {
+      main.classList.remove('is-transitioning');
+      finishProgressBar();
+      isPageTransitionActive = false;
+    });
+
+    // Update browser history
+    if (pushState) {
+      history.pushState({ url: targetUrl }, '', targetUrl);
+    }
+
+    // Re-bind page-specific interactive logic
+    reinitializePageComponents();
+  } catch (err) {
+    console.warn('Falling back to direct navigation:', err);
+    finishProgressBar();
+    isPageTransitionActive = false;
+    window.location.href = targetUrl;
+  }
+}
+
 function initPageTransitions() {
-  document.body.classList.remove('page-fading-out');
+  getProgressBar();
 
   document.addEventListener('click', (e) => {
     const link = e.target.closest('a');
@@ -433,7 +615,7 @@ function initPageTransitions() {
     const href = link.getAttribute('href');
     if (!href) return;
 
-    // Skip anchors, modals, telephone, email, and target="_blank"
+    // Skip in-page anchors, modals, telephone, email, and external links
     if (
       href.startsWith('#') ||
       href.startsWith('mailto:') ||
@@ -442,7 +624,7 @@ function initPageTransitions() {
       link.target === '_blank' ||
       link.hasAttribute('download') ||
       link.classList.contains('open-giving-modal') ||
-      (link.closest('.give-dropdown-menu') && href.includes('open-giving-modal'))
+      (link.closest('.give-dropdown-menu') && link.classList.contains('open-giving-modal'))
     ) {
       return;
     }
@@ -454,27 +636,23 @@ function initPageTransitions() {
       return;
     }
 
-    // Only transition internal pages on the same domain
+    // Only handle internal links within the site
     if (targetUrl.origin === window.location.origin) {
-      // If clicking the current page URL without hash, scroll to top
+      // If clicking the current page URL without hash, scroll smoothly to top
       if (targetUrl.pathname === window.location.pathname && !targetUrl.hash) {
         e.preventDefault();
         window.scrollTo({ top: 0, behavior: 'smooth' });
         return;
       }
 
-      // Smoothly fade out current page then load target
+      // If linking to a different internal page
       e.preventDefault();
-      document.body.classList.add('page-fading-out');
-      setTimeout(() => {
-        window.location.href = targetUrl.href;
-      }, 190);
+      transitionToPage(targetUrl.href, true);
     }
   });
 
-  window.addEventListener('pageshow', (event) => {
-    if (event.persisted) {
-      document.body.classList.remove('page-fading-out');
-    }
+  // Handle browser back and forward button clicks
+  window.addEventListener('popstate', (e) => {
+    transitionToPage(window.location.href, false);
   });
 }
