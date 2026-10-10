@@ -36,7 +36,14 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  /* Controlled calm glide managed via js/main.js */
+  scroll-behavior: auto;
+}
+
+/* Ensure clean breathing room below sticky header on anchor navigation */
+section[id],
+div[id] {
+  scroll-margin-top: 85px;
 }
 
 body {
