@@ -1,13 +1,18 @@
 /**
  * Daybreak Community Church - Interaction Engine
- * Clean, modern church experience with zero preloader swipe delays
+ * Clean, modern church experience with flawless smooth navigation
  */
+
+// Prevent abrupt native hash jumping on external page arrival
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
 
 document.addEventListener('DOMContentLoaded', () => {
   // 1. STICKY NAVBAR & MOBILE MENU
   initNavigation();
 
-  // 2. LUXURIOUS SMOOTH GLIDE FOR PAGE SECTIONS (Calm, relaxed ease-in-out pacing)
+  // 2. FLAWLESS SMOOTH GLIDE ENGINE (Organic sinusoidal curve, zero stagnation)
   initSmoothGlide();
 
   // 3. SCRIPTURE & MISSION SHOWCASE (Tranquil, manual navigation — no auto-swipe timer)
@@ -26,20 +31,29 @@ document.addEventListener('DOMContentLoaded', () => {
 /* ==========================================================================
    1. NAVIGATION & MOBILE MENU
    ========================================================================== */
+let isProgrammaticGliding = false;
+
 function initNavigation() {
   const navbar = document.querySelector('.hero-navbar');
   const toggleBtn = document.querySelector('.menu-toggle-btn');
   const navMenu = document.querySelector('.nav-menu');
   const navLinks = document.querySelectorAll('.hero-nav-link');
 
-  // Sticky nav state on scroll
+  // Sticky nav state on scroll (throttled with rAF)
+  let isNavTicking = false;
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 40) {
-      navbar.classList.add('scrolled');
-    } else {
-      navbar.classList.remove('scrolled');
+    if (!isNavTicking) {
+      window.requestAnimationFrame(() => {
+        if (window.scrollY > 40) {
+          navbar && navbar.classList.add('scrolled');
+        } else {
+          navbar && navbar.classList.remove('scrolled');
+        }
+        isNavTicking = false;
+      });
+      isNavTicking = true;
     }
-  });
+  }, { passive: true });
 
   // Mobile menu toggle
   if (toggleBtn && navMenu) {
@@ -58,100 +72,84 @@ function initNavigation() {
     });
   }
 
-  // Active section indicator on scroll
+  // Active section indicator on scroll (throttled & paused during programmatic glide)
   const sections = document.querySelectorAll('section[id]');
-  window.addEventListener('scroll', () => {
-    const scrollY = window.pageYOffset;
-    sections.forEach(current => {
-      const sectionHeight = current.offsetHeight;
-      const sectionTop = current.offsetTop - 100;
-      const sectionId = current.getAttribute('id');
-      const navLink = document.querySelector(`.hero-nav-link[href*="${sectionId}"]`);
+  if (sections.length) {
+    let isScrollSpyTicking = false;
+    window.addEventListener('scroll', () => {
+      if (isProgrammaticGliding) return; // Prevent layout thrashing during smooth glide!
+      if (!isScrollSpyTicking) {
+        window.requestAnimationFrame(() => {
+          const scrollY = window.pageYOffset;
+          sections.forEach(current => {
+            const sectionHeight = current.offsetHeight;
+            const sectionTop = current.offsetTop - 120;
+            const sectionId = current.getAttribute('id');
+            const navLink = document.querySelector(`.hero-nav-link[href*="${sectionId}"]`);
 
-      if (navLink) {
-        if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-          navLink.classList.add('active');
-        } else {
-          navLink.classList.remove('active');
-        }
+            if (navLink) {
+              if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                navLink.classList.add('active');
+              } else {
+                navLink.classList.remove('active');
+              }
+            }
+          });
+          isScrollSpyTicking = false;
+        });
+        isScrollSpyTicking = true;
       }
-    });
-  });
+    }, { passive: true });
+  }
 }
 
 /* ==========================================================================
-   2. SILKY SMOOTH GLIDE ENGINE
-   Calm, luxurious ease-in-out scroll for section navigation — never rushed
+   2. FLAWLESS SMOOTH GLIDE ENGINE
+   Calm, organic sinusoidal easing (easeInOutSine) — zero stagnation, zero rush
    ========================================================================== */
 let activeGlideId = null;
 
-function smoothGlideTo(targetElement, newHash = null) {
-  if (!targetElement) return;
-
-  // Cancel any running animation
+function smoothGlideTo(targetY, newHash = null) {
   if (activeGlideId) {
     cancelAnimationFrame(activeGlideId);
     activeGlideId = null;
   }
 
-  const navbar = document.querySelector('.hero-navbar');
-  const navHeight = navbar ? navbar.offsetHeight : 75;
   const startY = window.pageYOffset;
-  const targetY = Math.max(0, targetElement.getBoundingClientRect().top + window.pageYOffset - navHeight - 16);
   const distance = targetY - startY;
 
-  // Already at target
-  if (Math.abs(distance) < 4) {
+  // If already at target within a few pixels, update hash and exit
+  if (Math.abs(distance) < 5) {
     if (newHash && window.location.hash !== newHash) {
       history.pushState(null, '', newHash);
     }
     return;
   }
 
-  // Calm pacing: 750ms for close sections, up to 1250ms for long trips down the page
-  const duration = Math.min(1300, Math.max(750, Math.abs(distance) * 0.42));
+  // Gentle, fluid pacing: 650ms for short scrolls, up to 950ms for full-page voyages
+  const duration = Math.min(1000, Math.max(650, Math.round(Math.abs(distance) * 0.28)));
   let startTime = null;
+  isProgrammaticGliding = true;
 
-  // Silky cubic ease-in-out curve
-  function easeInOutCubic(t) {
-    return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  // Organic sinusoidal easing: Starts moving immediately on frame 1 (no dead zone/stagnation),
+  // cruises at a composed speed (never rushes), and cushions gently to a stop.
+  function easeInOutSine(t) {
+    return -(Math.cos(Math.PI * t) - 1) / 2;
   }
-
-  function cancelGlide() {
-    if (activeGlideId) {
-      cancelAnimationFrame(activeGlideId);
-      activeGlideId = null;
-    }
-    removeCancelListeners();
-  }
-
-  function addCancelListeners() {
-    window.addEventListener('wheel', cancelGlide, { passive: true, once: true });
-    window.addEventListener('touchstart', cancelGlide, { passive: true, once: true });
-    window.addEventListener('keydown', cancelGlide, { passive: true, once: true });
-  }
-
-  function removeCancelListeners() {
-    window.removeEventListener('wheel', cancelGlide);
-    window.removeEventListener('touchstart', cancelGlide);
-    window.removeEventListener('keydown', cancelGlide);
-  }
-
-  addCancelListeners();
 
   function step(currentTime) {
     if (!startTime) startTime = currentTime;
     const elapsed = currentTime - startTime;
     const progress = Math.min(elapsed / duration, 1);
-    const ease = easeInOutCubic(progress);
+    const ease = easeInOutSine(progress);
 
-    window.scrollTo(0, startY + (distance * ease));
+    window.scrollTo(0, Math.round(startY + (distance * ease)));
 
     if (progress < 1) {
       activeGlideId = requestAnimationFrame(step);
     } else {
       activeGlideId = null;
-      removeCancelListeners();
+      isProgrammaticGliding = false;
       if (newHash && window.location.hash !== newHash) {
         history.pushState(null, '', newHash);
       }
@@ -161,39 +159,94 @@ function smoothGlideTo(targetElement, newHash = null) {
   activeGlideId = requestAnimationFrame(step);
 }
 
+function smoothGlideToElement(targetElement, newHash = null) {
+  if (!targetElement) return;
+  const navbar = document.querySelector('.hero-navbar');
+  const navHeight = navbar ? navbar.offsetHeight : 75;
+  const targetY = Math.max(0, targetElement.getBoundingClientRect().top + window.pageYOffset - navHeight - 16);
+  smoothGlideTo(targetY, newHash);
+}
+
 function initSmoothGlide() {
-  // Listen for clicks on links with hash targets
+  const isHomePage = window.location.pathname.endsWith('/index.html') || 
+                     window.location.pathname.endsWith('/') || 
+                     window.location.pathname === '';
+
+  // Intercept all anchor link clicks across all pages
   document.addEventListener('click', (e) => {
-    const link = e.target.closest('a[href*="#"]');
+    const link = e.target.closest('a');
     if (!link) return;
 
     const href = link.getAttribute('href');
-    if (!href || href === '#' || href === '#!') return;
+    if (!href) return;
 
-    // Check if the link points to an anchor on this current page
-    const url = new URL(link.href, window.location.href);
-    const isSamePath = (url.pathname === window.location.pathname) ||
-      (window.location.pathname.endsWith('/') && url.pathname.endsWith('/index.html')) ||
-      (url.pathname.endsWith('/') && window.location.pathname.endsWith('/index.html'));
-
-    if (isSamePath && url.hash) {
-      const targetElement = document.querySelector(url.hash);
-      if (targetElement) {
+    // 1. On-page hash link (e.g. href="#about", href="#contact", href="#giving-funds")
+    if (href.startsWith('#')) {
+      if (href === '#' || href === '#!') return;
+      const target = document.querySelector(href);
+      if (target) {
         e.preventDefault();
-        smoothGlideTo(targetElement, url.hash);
+        smoothGlideToElement(target, href);
+        return;
+      }
+    }
+
+    // 2. Brand logo click on homepage: glide softly to top
+    if (isHomePage && (href === 'index.html' || href === './index.html' || href === '/') && link.classList.contains('brand')) {
+      e.preventDefault();
+      smoothGlideTo(0, '#');
+      return;
+    }
+
+    // 3. Link targeting index.html with a hash (e.g. "index.html#about")
+    if (href.includes('index.html#') || (href.startsWith('#') && isHomePage)) {
+      const hashIndex = href.indexOf('#');
+      const hash = href.substring(hashIndex);
+
+      if (isHomePage) {
+        // Already on the homepage: glide smoothly right now!
+        const target = document.querySelector(hash);
+        if (target) {
+          e.preventDefault();
+          smoothGlideToElement(target, hash);
+          return;
+        }
+      } else {
+        // On another page (e.g. meet-the-team.html):
+        // Save target in sessionStorage and navigate cleanly to index.html without hash
+        // to prevent the browser from doing an ugly sudden native snap on arrival!
+        e.preventDefault();
+        try {
+          sessionStorage.setItem('pendingGlideTarget', hash);
+        } catch (err) {}
+        window.location.href = 'index.html';
+        return;
       }
     }
   });
 
-  // Handle direct navigation with a hash in URL (e.g., coming from another page)
-  if (window.location.hash) {
-    const targetElement = document.querySelector(window.location.hash);
-    if (targetElement) {
-      // Pause slightly for DOM and image layouts to settle, then glide smoothly
-      setTimeout(() => {
-        smoothGlideTo(targetElement, window.location.hash);
-      }, 300);
+  // Handle incoming navigation with a pending glide target from another page
+  let pendingHash = null;
+  try {
+    pendingHash = sessionStorage.getItem('pendingGlideTarget');
+    if (pendingHash) {
+      sessionStorage.removeItem('pendingGlideTarget');
     }
+  } catch (err) {}
+
+  if (!pendingHash && window.location.hash) {
+    pendingHash = window.location.hash;
+  }
+
+  if (pendingHash && pendingHash.startsWith('#') && pendingHash !== '#') {
+    // Ensure starting at top, then wait a brief moment for layout/images before gliding
+    window.scrollTo(0, 0);
+    setTimeout(() => {
+      const target = document.querySelector(pendingHash);
+      if (target) {
+        smoothGlideToElement(target, pendingHash);
+      }
+    }, 180);
   }
 }
 
